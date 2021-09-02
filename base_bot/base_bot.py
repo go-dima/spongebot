@@ -59,6 +59,6 @@ class BaseBot():
     def _unsubscribe(self, bot, context):
         client = str(bot.message.chat.id)
         print(client)
-        if client in clients:
+        if client in self.listeners:
             clients.reomve(client)
             self._store_clients()
