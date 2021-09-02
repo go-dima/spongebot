@@ -1,0 +1,13 @@
+[Unit]
+Description=Spongebot Service
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+WorkingDirectory=/home/dimag/spongebot/
+ExecStartPre=/bin/sleep 3
+ExecStart=/home/dimag/spongebot/venv/bin/python /home/dimag/spongebot/spongebot.py
+
+[Install]
+WantedBy=multi-user.target
