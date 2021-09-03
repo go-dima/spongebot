@@ -55,10 +55,12 @@ class BaseBot():
             self.listeners.append(client)
             self._store_clients()
             print(f"{client}, welcome!")
+            bot.message.reply_text("Registered")
 
     def _unsubscribe(self, bot, context):
         client = str(bot.message.chat.id)
         print(client)
         if client in self.listeners:
-            clients.reomve(client)
+            self.listeners.remove(client)
             self._store_clients()
+            bot.message.reply_text("Bye")
