@@ -1,6 +1,6 @@
 import functools
 from telegram import Bot
-from telegram.ext import Updater, InlineQueryHandler, CommandHandler
+from telegram.ext import Updater, CommandHandler
 
 
 def trycatch(func):

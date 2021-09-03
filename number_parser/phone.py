@@ -4,9 +4,13 @@ import re
 
 def format_number(phone_number, debug=False):
   phone_number = re.sub("[^0-9]", '', phone_number)
+
+  if len(phone_number) < 10:
+    return ""
+
   if phone_number[0] == '0':
     phone_number = phone_number[1:]
-  
+
   if debug:
     print(phone_number)
 
