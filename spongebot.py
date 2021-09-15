@@ -4,8 +4,9 @@ from uuid import uuid4
 
 from telegram import InlineQueryResultArticle, InputTextMessageContent
 from telegram.ext import MessageHandler, Filters, InlineQueryHandler
-from number_parser.phone import format_number
+
 from base_bot.base_bot import BaseBot
+from number_parser.phone import format_number
 
 
 class WhatsappBot(BaseBot):
@@ -42,6 +43,7 @@ class WhatsappBot(BaseBot):
 def main():
     bot = WhatsappBot("clients-list.dat")
     bot.start()
+
 
 if __name__ == '__main__':
     main()

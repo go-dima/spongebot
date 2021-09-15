@@ -1,4 +1,5 @@
 import functools
+
 from telegram import Bot
 from telegram.ext import Updater, CommandHandler
 
@@ -11,10 +12,11 @@ def trycatch(func):
         except Exception as ex:
             print(f"Error in {func.__name__}")
             print(ex)
+
     return wrapper
 
 
-class BaseBot():
+class BaseBot:
     def __init__(self, name: str, clients_file: str):
         self.clients_file = clients_file
         self.token = open(f"{name}.token", "r").read().splitlines()[0]
@@ -51,7 +53,7 @@ class BaseBot():
         client = str(bot.message.chat.id)
         print(client)
         print(self.listeners)
-        if not client in self.listeners:
+        if client not in self.listeners:
             self.listeners.append(client)
             self._store_clients()
             print(f"{client}, welcome!")
