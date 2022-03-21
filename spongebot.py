@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 
+import logging
 from uuid import uuid4
 
 from telegram import InlineQueryResultArticle, InputTextMessageContent
 from telegram.ext import MessageHandler, Filters, InlineQueryHandler
-from number_parser.phone import format_number
+
 from base_bot.base_bot import BaseBot
+from number_parser.phone import format_number
 
 
 class WhatsappBot(BaseBot):
@@ -20,12 +22,12 @@ class WhatsappBot(BaseBot):
         return f"http://wa.me/{parsed_number}"
 
     def _reply_message(self, bot, context):
-        print("message", bot.message.text)
+        logging.info(f"message is {bot.message.text}")
         bot.message.reply_text(self._whatsapp_link(bot.message.text))
 
     def _reply_inline(self, bot, context):
         query = bot.inline_query.query
-        print("query", query)
+        logging.info(f"query is {query}")
         if len(query) < 10:
             return
 
@@ -42,6 +44,7 @@ class WhatsappBot(BaseBot):
 def main():
     bot = WhatsappBot("clients-list.dat")
     bot.start()
+
 
 if __name__ == '__main__':
     main()
