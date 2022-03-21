@@ -57,7 +57,7 @@ class BaseBot:
 
     @trycatch
     def _subscribe(self, update, context):
-        client = str(update.message.chat_id)
+        client = str(update.message.chat.id)
         logger.info(f"Subscribing client {client}")
         if client in self.listeners:
             logger.info(f"Client {client} is already subscribed")
@@ -69,7 +69,7 @@ class BaseBot:
             update.message.reply_text("You have been subscribed!")
 
     def _unsubscribe(self, update, context):
-        client = str(update.message.chat_id)
+        client = str(update.message.chat.id)
         logger.info(f"Unsubscribing client {client}")
         if client in self.listeners:
             self.listeners.remove(client)
