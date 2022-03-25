@@ -1,8 +1,0 @@
-version: "3.6"
-services:
-  spongebot:
-      container_name: spongebot
-      image: spongebot:1.0.0
-      restart: unless-stopped
-      volumes:
-        - /path/to/token/spongebot.token:/app/spongebot.token:ro
