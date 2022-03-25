@@ -19,6 +19,6 @@ def format_number(phone_number, debug=False):
     return prefix + phone_number
 
 
-assert format_number("0547645971") == "972547645971"
-assert format_number("0547-645971") == "972547645971"
-assert format_number("+972-547645971") == "972547645971"
+assert format_number("0123456789") == "972123456789"
+assert format_number("0123-456789") == "972123456789"
+assert format_number("+972-123456789") == "972123456789"
