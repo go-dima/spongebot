@@ -15,7 +15,7 @@ from utils.utils import setup_logger
 logger = logging.getLogger(__name__)
 setup_logger(logger)
 
-_version_ = "0.1.0"
+_version_ = "1.0.0"
 
 
 def log_call(func):
