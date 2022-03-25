@@ -1,12 +1,14 @@
+from abc import abstractmethod
 import functools
 import logging
 
 from telegram import Bot
 from telegram.ext import Updater, CommandHandler
+from utils.utils import setup_logger
 
-# Enable logging
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+
 logger = logging.getLogger(__name__)
+setup_logger(logger)
 
 
 def trycatch(func):
@@ -33,6 +35,7 @@ class BaseBot:
         self.dp.add_handler(CommandHandler('echo', self._echo))
         self.dp.add_handler(CommandHandler('subscribe', self._subscribe))
         self.dp.add_handler(CommandHandler('unsubscribe', self._unsubscribe))
+        self.dp.add_handler(CommandHandler('version', self._version))
 
     def start(self):
         self.updater.start_polling()
@@ -42,7 +45,7 @@ class BaseBot:
         logger.info(f"current registered clients: {self.listeners}")
         for client_id in self.listeners:
             if len(client_id) > 0:
-                self.telegram_client.send_message(chat_id=client_id, text="I'm back online!")
+                self.telegram_client.send_message(chat_id=client_id, text=f"v{self.version()} - I'm back online!")
 
     def _store_clients(self):
         logger.info("Updating clients list..")
@@ -79,3 +82,10 @@ class BaseBot:
         else:
             logger.info(f"Client {client} is not subscribed")
             update.message.reply_text("You are not subscribed.")
+
+    def _version(self, update, context):
+        update.message.reply_text(self.version())
+
+    @abstractmethod
+    def version(self):
+        pass

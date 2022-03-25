@@ -1,0 +1,10 @@
+version: "3.6"
+services:
+  spongebot:
+      container_name: spongebot
+      image: ${WORKING_IMG}
+      restart: unless-stopped
+      volumes:
+        - ${PWD}/spongebot.token:/app/spongebot.token:ro
+        - ${PWD}/clients-list.dat:/app/clients-list.dat
+        - ${PWD}/logs:/app/logs
