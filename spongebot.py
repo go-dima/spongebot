@@ -64,7 +64,7 @@ class WhatsappBot(BaseBot):
 
 
 def main():
-    logger.info("Loading spongebot")
+    logger.info(f"Loading spongebot v{_version_}")
     bot = WhatsappBot("clients-list.dat")
     bot.start()
 
