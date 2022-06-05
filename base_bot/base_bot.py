@@ -33,6 +33,7 @@ class BaseBot:
 
         self.dp = self.updater.dispatcher
         self.dp.add_handler(CommandHandler('echo', self._echo))
+        self.dp.add_handler(CommandHandler('start', self._start_bot))
         self.dp.add_handler(CommandHandler('subscribe', self._subscribe))
         self.dp.add_handler(CommandHandler('unsubscribe', self._unsubscribe))
         self.dp.add_handler(CommandHandler('version', self._version))
@@ -51,6 +52,9 @@ class BaseBot:
         logger.info("Updating clients list..")
         with open(self.clients_file, mode='w') as clients_file:
             clients_file.write('\n'.join(self.listeners))
+
+    def _start_bot(self, update, context):
+        update.message.reply_text(self.description)
 
     def _echo(self, update, context):
         if context.args:

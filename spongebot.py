@@ -15,12 +15,15 @@ from utils.utils import setup_logger
 logger = logging.getLogger(__name__)
 setup_logger(logger)
 
-_version_ = "1.0.0"
+_version_ = "1.0.1"
 
 
 def log_call(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
+        if len(args > 1):
+            update = args[1]
+            logger.info(f"{func.__name__}, {update.message.chat}")
         logger.info(f"{func.__name__} was called")
         return func(*args, **kwargs)
 
@@ -29,6 +32,8 @@ def log_call(func):
 
 class WhatsappBot(BaseBot):
     def __init__(self, clients_file: str):
+        self.description = "\
+        Send me a mobile phone number, and I'll convert it to WhatsApp direct message link!"
         super().__init__("spongebot", clients_file)
         self.dp.add_handler(MessageHandler(Filters.text & ~Filters.command, self._reply_message))
         self.dp.add_handler(InlineQueryHandler(self._reply_inline))
