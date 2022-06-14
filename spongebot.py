@@ -21,7 +21,7 @@ _version_ = "1.0.1"
 def log_call(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        if len(args > 1):
+        if len(args) > 1:
             update = args[1]
             logger.info(f"{func.__name__}, {update.message.chat}")
         logger.info(f"{func.__name__} was called")
